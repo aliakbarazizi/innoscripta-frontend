@@ -11,7 +11,7 @@ This is the frontend service for the project, built with React and TypeScript. T
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/aliakbarazizi/innoscripta-frontend frontend
 cd frontend
 ```
 
