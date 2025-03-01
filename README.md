@@ -1,6 +1,6 @@
 # Frontend Service
 
-This is the frontend service for the project, built with React and TypeScript. The application is containerized using Docker and can be run using docker-compose.
+This is the frontend service for the project, built with React and TypeScript. The application is containerized using Docker and can be run using docker compose.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ APP_PORT=8000 # Change as needed
 ### 3. Run the Application
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 The application should now be running on `http://localhost:8000`.
