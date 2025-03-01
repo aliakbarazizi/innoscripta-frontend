@@ -1,0 +1,17 @@
+@import url("https://rsms.me/inter/inter.css");
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "InterVariable", sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    @apply h-full bg-slate-100;
+  }
+
+  body {
+    @apply font-inter text-slate-900;
+  }
+}
