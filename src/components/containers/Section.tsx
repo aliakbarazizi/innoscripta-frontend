@@ -19,7 +19,7 @@ export default function Section({
   return (
     <div
       className={classNames(
-        "flex flex-col gap-6 rounded-lg border border-gray-200 bg-white p-6 shadow-xs",
+        "flex flex-col gap-6 rounded-lg border border-gray-200 bg-white px-3 py-6 shadow-xs sm:p-6",
         className,
       )}
       {...props}

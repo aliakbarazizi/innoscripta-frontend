@@ -11,7 +11,7 @@ type Props = {
 export default function Article({ article }: Props) {
   return (
     <Section>
-      <div className="relative -m-6 mb-2 aspect-video select-none lg:aspect-3/2">
+      <div className="relative -mx-3 -my-6 mb-2 aspect-video select-none sm:-mx-6 lg:aspect-3/2">
         {article.thumbnail ? (
           <img
             className="h-full w-full rounded-t-lg object-cover"
@@ -36,7 +36,7 @@ export default function Article({ article }: Props) {
       <div className="mt-4 -mb-2 flex items-center">
         {article.author && (
           <div className="flex items-center gap-2">
-            <div className="rounded-full bg-gray-200 p-2">
+            <div className="hidden rounded-full bg-gray-200 p-2 sm:block">
               <User02 className="size-5 text-gray-700" />
             </div>
             <div>
