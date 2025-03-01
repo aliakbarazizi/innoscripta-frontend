@@ -35,10 +35,9 @@ function RouteComponent() {
 
   useEffect(() => {
     setComponent(
-      <ArticleSearchBar
-        state={store.current!.getState()}
-        setState={store.current!.setState}
-      />,
+      <ArticleSearchContext.Provider value={store.current!}>
+        <ArticleSearchBar />
+      </ArticleSearchContext.Provider>,
     );
     return () => setComponent(null);
   }, [setComponent]);

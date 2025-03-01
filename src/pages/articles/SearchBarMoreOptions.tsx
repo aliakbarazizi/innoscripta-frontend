@@ -4,10 +4,10 @@ import { useNavigate } from "@tanstack/react-router";
 import { ChevronDown, Save02 } from "@untitled-ui/icons-react";
 import classNames from "classnames";
 import { useState } from "react";
-import Select from "react-select";
-import { useDebounceValue } from "usehooks-ts";
 
 import Button from "../../components/core/Button";
+import SearchableSelect from "../../components/core/SearchableSelect";
+import { useSearchableQuery } from "../../hooks/useSearchableQuery";
 import { fetchAuthorsQueryOptions } from "../../services/authors";
 import { fetchCategoriesQueryOptions } from "../../services/categories";
 import { fetchSourcesQueryOptions } from "../../services/sources";
@@ -29,23 +29,26 @@ export default function SearchBarMoreOptions({ state, setState }: Props) {
 
   const { data: me } = useQuery(fetchMeQueryOptions());
 
-  const [authorSearch, setAuthorSearch] = useState("");
-  const [debouncedAuthorSearch] = useDebounceValue(authorSearch, 500);
-  const { data: authors, isLoading: authorsLoading } = useQuery(
-    fetchAuthorsQueryOptions(debouncedAuthorSearch),
-  );
+  const {
+    data: authors,
+    isLoading: authorsLoading,
+    search: authorSearch,
+    setSearch: setAuthorSearch,
+  } = useSearchableQuery(fetchAuthorsQueryOptions);
 
-  const [categorySearch, setCategorySearch] = useState("");
-  const [debouncedCategorySearch] = useDebounceValue(categorySearch, 500);
-  const { data: categories, isLoading: categoriesLoading } = useQuery(
-    fetchCategoriesQueryOptions(debouncedCategorySearch),
-  );
+  const {
+    data: categories,
+    isLoading: categoriesLoading,
+    search: categorySearch,
+    setSearch: setCategorySearch,
+  } = useSearchableQuery(fetchCategoriesQueryOptions);
 
-  const [sourceSearch, setSourceSearch] = useState("");
-  const [debouncedSourceSearch] = useDebounceValue(sourceSearch, 500);
-  const { data: sources, isLoading: sourcesLoading } = useQuery(
-    fetchSourcesQueryOptions(debouncedSourceSearch),
-  );
+  const {
+    data: sources,
+    isLoading: sourcesLoading,
+    search: sourceSearch,
+    setSearch: setSourceSearch,
+  } = useSearchableQuery(fetchSourcesQueryOptions);
 
   const { mutate: updatePreferences, isPending: isUpdatePending } =
     useUpdatePreferences();
@@ -97,12 +100,8 @@ export default function SearchBarMoreOptions({ state, setState }: Props) {
               "lg:flex-row lg:py-0",
             )}
           >
-            <Select
-              isMulti
+            <SearchableSelect
               options={authors?.data || []}
-              isSearchable
-              isClearable
-              hideSelectedOptions={false}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => `${option.id}`}
               inputValue={authorSearch}
@@ -110,16 +109,11 @@ export default function SearchBarMoreOptions({ state, setState }: Props) {
               isLoading={authorsLoading}
               value={state.authors}
               onChange={(data) => setState({ ...state, authors: [...data] })}
-              filterOption={null}
               className="w-full p-2"
               placeholder="Filter authors..."
             />
-            <Select
-              isMulti
+            <SearchableSelect
               options={categories?.data || []}
-              isSearchable
-              isClearable
-              hideSelectedOptions={false}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => `${option.id}`}
               inputValue={categorySearch}
@@ -127,16 +121,11 @@ export default function SearchBarMoreOptions({ state, setState }: Props) {
               isLoading={categoriesLoading}
               value={state.categories}
               onChange={(data) => setState({ ...state, categories: [...data] })}
-              filterOption={null}
               className="w-full p-2"
               placeholder="Filter categories..."
             />
-            <Select
-              isMulti
+            <SearchableSelect
               options={sources?.data || []}
-              isSearchable
-              isClearable
-              hideSelectedOptions={false}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => `${option.id}`}
               inputValue={sourceSearch}
@@ -144,7 +133,6 @@ export default function SearchBarMoreOptions({ state, setState }: Props) {
               isLoading={sourcesLoading}
               value={state.sources}
               onChange={(data) => setState({ ...state, sources: [...data] })}
-              filterOption={null}
               className="w-full p-2"
               placeholder="Filter sources..."
             />

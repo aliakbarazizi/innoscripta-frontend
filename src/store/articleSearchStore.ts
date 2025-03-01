@@ -15,6 +15,7 @@ export interface ArticleSearchState extends InitialState {
   setAuthors: (authors: Author[]) => void;
   setCategories: (categories: Category[]) => void;
   setSources: (sources: Source[]) => void;
+  setSearchState: (state: InitialState) => void;
 }
 
 export const createArticleSearchStore = (init: InitialState) => {
@@ -24,6 +25,7 @@ export const createArticleSearchStore = (init: InitialState) => {
     setAuthors: (authors) => set({ authors }),
     setCategories: (categories) => set({ categories }),
     setSources: (sources) => set({ sources }),
+    setSearchState: (state) => set(state),
   }));
 };
 

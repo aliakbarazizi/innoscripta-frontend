@@ -3,7 +3,9 @@ import { SearchLg } from "@untitled-ui/icons-react";
 import classNames from "classnames";
 import { RefObject, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
+import { useShallow } from "zustand/react/shallow";
 
+import { useArticleStore } from "../../store/articleSearchStore";
 import { Author, Category, Source } from "../../types";
 import SearchBarMoreOptions from "./SearchBarMoreOptions";
 
@@ -14,13 +16,24 @@ export type SearchState = {
   sources: Source[];
 };
 
-type Props = {
-  state: SearchState;
-  setState: (state: SearchState) => void;
-};
+export default function ArticleSearchBar() {
+  const { authors, sources, categories, query, setSearchState } =
+    useArticleStore(
+      useShallow(({ authors, sources, categories, query, setSearchState }) => ({
+        authors,
+        sources,
+        categories,
+        query,
+        setSearchState,
+      })),
+    );
 
-export default function ArticleSearchBar({ state, setState }: Props) {
-  const [localState, setLocalState] = useState(state);
+  const [localState, setLocalState] = useState({
+    query,
+    authors,
+    categories,
+    sources,
+  });
 
   const [open, setOpen] = useState(false);
 
@@ -31,7 +44,7 @@ export default function ArticleSearchBar({ state, setState }: Props) {
   const handleSubmit = (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
 
-    setState(localState);
+    setSearchState(localState);
 
     setOpen(false);
   };
