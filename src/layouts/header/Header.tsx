@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="border-b border-gray-200 bg-white">
+      <div className="sticky top-0 z-10 border-b border-gray-200 bg-white shadow-md">
         <div className="relative container mx-auto flex items-center gap-4 px-4 lg:px-0">
           <HeaderNavigationButton to="/">Explore</HeaderNavigationButton>
           <HeaderNavigationButton to="/feed">Feed</HeaderNavigationButton>

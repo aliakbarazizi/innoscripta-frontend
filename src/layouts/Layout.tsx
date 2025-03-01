@@ -4,7 +4,7 @@ import Header from "./header/Header";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <HeaderContextProvivder>
-      <div className="flex h-full flex-col">
+      <div className="flex flex-col">
         <Header />
         {children}
       </div>
